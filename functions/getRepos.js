@@ -1,8 +1,8 @@
 const request = require("request");
 const axios = require('axios');
 const paginationWorker = require('./paginationWorker');
-const secret = '65efde6988a80157a25629202d09ea23b4f52096';
-const oauthid = '47a9e669be1b3d1e913f';
+const secret = '';
+const oauthid = '';
 const endURL = '?client_id=' + oauthid + '&client_secret=' + secret;
 let githubLogin = ''
 exports.getUserSkills = async (githubUserName) => {
