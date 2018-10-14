@@ -8,8 +8,8 @@ const getUserSkills = require("./getRepos");
 const axios = require("axios");
 
 // For Rate Limiting
-const secret = "ea10485ed2eb7370c3704fc34d4986c502791726";
-const oauthid = "1f2826df09ac7cff9bd6";
+const secret = "";
+const oauthid = "";
 const endURL = "?client_id=" + oauthid + "&client_secret=" + secret;
 
 // Use cors
