@@ -4,8 +4,8 @@ const paginationWorker = require('./paginationWorker');
 const queryStrBeg = 'https://api.github.com/search/users?q=repos%3A1+location%3A';
 const queryStrEnd = '&type=Users';
 
-const secret = '65efde6988a80157a25629202d09ea23b4f52096';
-const oauthid = '47a9e669be1b3d1e913f';
+const secret = '';
+const oauthid = '';
 const endURL1 = '&client_id=' + oauthid + '&client_secret=' + secret;
 const endURL2 = '?client_id=' + oauthid + '&client_secret=' + secret;
 const RECENT_DAYS = 5000;
