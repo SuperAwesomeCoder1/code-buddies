@@ -1,10 +1,12 @@
 const request = require("request");
 const axios = require('axios');
-const secret = '342361db8a1cbfedd55cf9e31b46d47111c94612';
-const oauthid = '526506a7c2a66d90c2dc';
+const paginationWorker = require('./paginationWorker');
+const secret = '65efde6988a80157a25629202d09ea23b4f52096';
+const oauthid = '47a9e669be1b3d1e913f';
 const endURL = '?client_id=' + oauthid + '&client_secret=' + secret;
 let githubLogin = ''
 exports.getUserSkills = async (githubUserName) => {
+  console.log('entering user:', githubUserName);
   let url = "https://api.github.com/users/" + githubUserName + "/repos" + endURL;
   githubLogin = githubUserName;
   let userData = await axios.get(url);
@@ -31,7 +33,10 @@ async function getWeightedSkills(commitMappings){
   let skills = {};
   for(let commitMapping of commitMappings) {
     try{
+      console.log('mappin url', commitMapping.url);
     let res = await axios.get(commitMapping.url);
+    if(!res)
+      return {};
     for(let commit of res.data){
       if(commit.commit.author.name === githubLogin){
         if(!skills[commitMapping.language]){
@@ -43,5 +48,6 @@ async function getWeightedSkills(commitMappings){
     }
     }catch(err){console.log(err.message);}
   }
+  console.log('user', githubLogin, 'tally', skills);
   return skills;
 }

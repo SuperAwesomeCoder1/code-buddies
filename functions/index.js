@@ -5,6 +5,9 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const getUserSkills = require("./getRepos")
 const app = express();
+const locationSearch = require('./locationSearch');
+const paginationWorker = require('./paginationWorker');
+
 
 // Use cors
 app.use(cors({ origin: true }));
@@ -18,17 +21,25 @@ app.get("/github", (req, res) => {
 
 app.post("/accountInfo", (req, res) => {
   var github = req.body.github;
-  res.send(getGithub(github));
+  getGithub(github, res);
+
 });
 
-function getGithub(github) {
-  getUserSkills.getUserSkills(github).then((res) => {
-  //  console.log(res);
+function getGithub(github, origresponse) {
+  getUserSkills.getUserSkills(github)
+  .then((res) => {
+    locationSearch.findRelevantUsers('london', res)
+    .then(response => {
+      console.log('res', response);
+      origresponse.send(response);
+      return response;
+    })
+    .catch(err => {console.log(err.message)})
     return res;
-  }).catch(err => {
+  })
+  .catch(err => {
     console.log(err.message)
   });
-  return "hi";
 }
 
 exports.findPartners = functions.https.onRequest(app);
