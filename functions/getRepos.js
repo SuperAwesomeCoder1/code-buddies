@@ -1,7 +1,7 @@
 const request = require("request");
 const axios = require("axios");
-const secret = "342361db8a1cbfedd55cf9e31b46d47111c94612";
-const oauthid = "526506a7c2a66d90c2dc";
+const secret = "";
+const oauthid = "";
 const endURL = "?client_id=" + oauthid + "&client_secret=" + secret;
 let githubLogin = "";
 exports.getUserSkills = async githubUserName => {
